@@ -4,6 +4,7 @@ public final class GenericResult<T>{
     private GenericResult(boolean state, T value, String error){
         this.isSuccess = state;
         this.error = error;
+        this.value = value;
     }
 
     private String error;
@@ -24,5 +25,9 @@ public final class GenericResult<T>{
 
     public T getValue() {
         return this.value;
+    }
+
+    public String getError() {
+        return error;
     }
 }

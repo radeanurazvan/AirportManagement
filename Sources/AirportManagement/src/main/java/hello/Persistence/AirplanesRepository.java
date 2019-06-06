@@ -2,11 +2,12 @@ package hello.Persistence;
 
 import hello.Domain.Airplane;
 import hello.Shared.GenericResult;
+import org.springframework.stereotype.Component;
 
-import javax.websocket.MessageHandler;
 import java.util.*;
 
-public final class AirplanesRepository {
+@Component
+public final class AirplanesRepository implements hello.Domain.Repositories.AirplanesRepository {
     private static List<Airplane> airplanes = new ArrayList<Airplane>(){
         {
             add(Airplane.create(10, "Small airplane").getValue());
@@ -22,7 +23,7 @@ public final class AirplanesRepository {
 
     public GenericResult<Airplane> getById(UUID id) {
         Optional<Airplane> airplaneOrNothing = airplanes.stream()
-                .filter(a -> a.getId() == id)
+                .filter(a -> a.getId().equals(id))
                 .findFirst();
 
         if(airplaneOrNothing.isEmpty()){

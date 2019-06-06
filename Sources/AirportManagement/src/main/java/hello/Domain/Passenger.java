@@ -11,7 +11,7 @@ public final class Passenger extends Entity {
         this.name = name;
     }
 
-    public static GenericResult<Passenger> Create(String name) {
+    public static GenericResult<Passenger> create(String name) {
         if(name == null || name.isEmpty()) {
             return GenericResult.fail("Invalid passenger name");
         }

@@ -20,4 +20,8 @@ public final class Result {
     public boolean isSuccess(){
         return this.isSuccess;
     }
+
+    public String getError() {
+        return error;
+    }
 }

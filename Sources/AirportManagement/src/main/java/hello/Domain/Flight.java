@@ -22,7 +22,7 @@ public final class Flight extends Entity {
         this.passengers = new ArrayList<>();
     }
 
-    public static GenericResult<Flight> Create(Airplane airplane, String departure, String destination) {
+    public static GenericResult<Flight> create(Airplane airplane, String departure, String destination) {
         if(airplane == null) {
             return GenericResult.fail("Invalid airplane");
         }
@@ -38,18 +38,26 @@ public final class Flight extends Entity {
         return GenericResult.ok(new Flight(airplane, departure, destination));
     }
 
-    public Result ChangeDestination(String destination) {
+    public Result changeDestination(String destination) {
         if(destination == null || destination.isEmpty()) {
             return Result.fail("Invalid destination");
+        }
+
+        if(this.passengers.size() > 1) {
+            return Result.fail("Cannot change destination of flight which has passengers!");
         }
 
         this.destination = destination;
         return Result.ok();
     }
 
-    public Result EmbarkPassenger(Passenger passenger) {
+    public Result embarkPassenger(Passenger passenger) {
         if(passenger == null) {
             return Result.fail("Invalid passenger");
+        }
+
+        if(this.passengers.size() >= this.airplane.getNumberOfSeats()) {
+            return Result.fail("Airplane is full");
         }
 
         passengers.add(passenger);
